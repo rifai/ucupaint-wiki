@@ -19,6 +19,9 @@ You need at least Blender 2.76 to use this addon, but more advanced features may
 ## Contribute
 Visit [Ucupaint Github](https://github.com/ucupumar/ucupaint) to access or contribute to the source code. Or visit [Ucupaint Wiki Github](https://github.com/ucupumar/ucupaint-wiki) to access or contribute to the source code of this wiki.
 
+## Sponsor
+If you find the addon useful, you can sponsor the addon development [here](https://github.com/sponsors/ucupumar)
+
 ## Discord Server
 
 You can join [Ucupaint Discord](https://discord.gg/BdNfGGzQHh) to ask or discuss things related to Ucupaint.
