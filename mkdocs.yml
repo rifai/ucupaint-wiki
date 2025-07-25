@@ -24,8 +24,11 @@ plugins:
       video_muted: True
       video_controls: True
       css_style:
-        width: "650px"
-        height: "500px"
+        width: "100%"           
+        max-width: "800px"      
+        height: "auto"         
+        display: "block"
+        margin: "auto"
 markdown_extensions:
   - admonition
   - pymdownx.details
