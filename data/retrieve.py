@@ -20,7 +20,7 @@ headers = {
 	'User-Agent': 'ucupaint-wiki-script' 
 }
 
-conn.request("GET", "/repos/ucupumar/ucupaint/collaborators", payload, headers)
+conn.request("GET", "/repos/ucupumar/ucupaint/contributors", payload, headers)
 res = conn.getresponse()
 
 # check if response is 200 OK
