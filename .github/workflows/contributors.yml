@@ -1,0 +1,60 @@
+name: Update contributors.csv
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+
+permissions:
+  contents: write  # needed to push with GITHUB_TOKEN
+
+concurrency:
+  group: update-contributors-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  run-and-commit:
+    runs-on: ubuntu-latest
+    env:
+      # default: use the workflow's built-in token
+      GH_API_TOKEN: ${{ secrets.PAT_TOKEN }}
+      # If you need broader/org-wide access, create a PAT secret (e.g., GH_PAT)
+      # and override GH_API_TOKEN with it:
+      # GH_API_TOKEN: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true  # use GITHUB_TOKEN for push
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run retrieve.py (with token)
+        run: |
+          cd data
+          python retrieve.py --token "$GH_API_TOKEN"
+
+      - name: Commit & push if data/contributors.csv changed
+        shell: bash
+        run: |
+          set -e
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -f data/contributors.csv ]; then
+            git add data/contributors.csv
+          fi
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update contributors.csv via workflow"
+          git push origin HEAD:${{ github.ref_name }}
