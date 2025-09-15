@@ -37,7 +37,7 @@ def retrieve_contributors(owner:str, repo:str, filename:str):
     try:
         json_content = json.loads(content)
         for user in json_content:
-            if user["Type"] == "Bot":
+            if user["type"] == "Bot":
                 continue
 
             print("login=", user['login'])
