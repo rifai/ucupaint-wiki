@@ -38,6 +38,7 @@ jobs:
         run: |
           cd data
           python retrieve.py --token "$GH_API_TOKEN"
+          python apply-page.py
 
       - name: Commit & push if data/contributors.csv changed
         shell: bash
@@ -53,6 +54,10 @@ jobs:
 
           if [ -f data/contributors-wiki.csv ]; then
             git add data/contributors-wiki.csv
+          fi
+
+          if [ -f docs/01.12.contributors.md ]; then
+            git add docs/01.12.contributors.md
           fi
 
           if git diff --cached --quiet; then
