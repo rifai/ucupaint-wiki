@@ -51,10 +51,14 @@ jobs:
             git add data/contributors.csv
           fi
 
+          if [ -f data/contributors-wiki.csv ]; then
+            git add data/contributors-wiki.csv
+          fi
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "Update contributors.csv via workflow"
+          git commit -m "Update contributors via workflow"
           git push origin HEAD:${{ github.ref_name }}
