@@ -68,5 +68,5 @@ jobs:
           git commit -m "Update contributors via workflow"
           git push origin HEAD:${{ github.ref_name }}
 
-      - name: Repository Dispatch
-        uses: ./.github/workflows/build.yml
+  call-child:
+    uses: ./.github/workflows/build.yml
