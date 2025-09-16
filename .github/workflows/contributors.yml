@@ -49,8 +49,8 @@ jobs:
         run: |
           set -e
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Ahmad Rifai"
+          git config user.email "riff.blend@gmail.com"
 
           if [ -f data/contributors.csv ]; then
             git add data/contributors.csv
@@ -76,7 +76,7 @@ jobs:
           git commit -m "Update contributors via workflow"
           git push origin HEAD:${{ github.ref_name }}
 
-  call-child:
-    name: Call another workflow
-    needs: run-and-commit
-    uses: ./.github/workflows/build.yml
+  # call-child:
+  #   name: Call another workflow
+  #   needs: run-and-commit
+  #   uses: ./.github/workflows/build.yml
