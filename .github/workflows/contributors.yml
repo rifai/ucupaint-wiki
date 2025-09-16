@@ -67,3 +67,10 @@ jobs:
 
           git commit -m "Update contributors via workflow"
           git push origin HEAD:${{ github.ref_name }}
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: ucupumar/ucupumar-wiki
+          event-type: trigger-contributors
