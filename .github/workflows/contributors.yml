@@ -69,4 +69,6 @@ jobs:
           git push origin HEAD:${{ github.ref_name }}
 
   call-child:
+    name: Call another workflow
+    needs: run-and-commit
     uses: ./.github/workflows/build.yml
