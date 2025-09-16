@@ -69,8 +69,4 @@ jobs:
           git push origin HEAD:${{ github.ref_name }}
 
       - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          repository: ucupumar/ucupaint-wiki
-          event-type: trigger-contributors
+        uses: ./.github/workflows/build.yml
