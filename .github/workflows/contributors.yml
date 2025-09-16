@@ -60,6 +60,10 @@ jobs:
             git add data/contributors-wiki.csv
           fi
 
+          if [ -f data/sponsors.csv ]; then
+            git add data/sponsors.csv
+          fi
+
           if [ -f docs/01.12.contributors.md ]; then
             git add docs/01.12.contributors.md
           fi
