@@ -5,12 +5,13 @@ content = '''
 # Wiki's Contributors
 {wiki_contributors}
 # Sponsors
+{sponsors}
 '''
 
 
 contributors = ''
 wiki_contributors = ''
-
+sponsors = ''
 
 with open('contributors.csv', 'r') as f:
 	lines = f.readlines()
@@ -28,7 +29,15 @@ with open('contributors-wiki.csv', 'r') as f:
 			login, url, pic = parts
 			wiki_contributors += f'* [{login}]({url})\n'
 
-content = content.format(contributors=contributors, wiki_contributors=wiki_contributors)
+with open('sponsors.csv', 'r') as f:
+	lines = f.readlines()
+	for line in lines:
+		parts = line.strip().split(', ')
+		if len(parts) == 3:
+			login, url, pic = parts
+			sponsors += f'* [{login}]({url})\n'
+
+content = content.format(contributors=contributors, wiki_contributors=wiki_contributors, sponsors=sponsors)
 
 with open('../docs/01.12.contributors.md', 'w') as f:
 	f.write(content)
