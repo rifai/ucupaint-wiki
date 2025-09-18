@@ -16,11 +16,8 @@ jobs:
   run-and-commit:
     runs-on: ubuntu-latest
     env:
-      # default: use the workflow's built-in token
-      GH_API_TOKEN: ${{ secrets.PAT_TOKEN }}
-      # If you need broader/org-wide access, create a PAT secret (e.g., GH_PAT)
-      # and override GH_API_TOKEN with it:
-      # GH_API_TOKEN: ${{ secrets.GH_PAT }}
+      GH_TOKEN_REPO: ${{ secrets.REPO_TOKEN }}
+      GH_TOKEN_SPONSOR: ${{ secrets.SPONSOR_TOKEN }}
 
     steps:
       - name: Checkout
@@ -41,7 +38,7 @@ jobs:
       - name: Run retrieve.py (with token)
         run: |
           cd data
-          python retrieve.py --token "$GH_API_TOKEN"
+          python retrieve.py --token "$GH_TOKEN_REPO" --token2 "$GH_TOKEN_SPONSOR"
           python apply-page.py
 
       - name: Commit & push if data/contributors.csv changed
@@ -62,6 +59,10 @@ jobs:
 
           if [ -f data/sponsors.csv ]; then
             git add data/sponsors.csv
+          fi
+
+          if [ -f data/sponsorship-goal.json ]; then
+            git add data/sponsorship-goal.json
           fi
 
           if [ -f docs/01.12.contributors.md ]; then

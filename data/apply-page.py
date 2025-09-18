@@ -33,8 +33,8 @@ with open('sponsors.csv', 'r') as f:
 	lines = f.readlines()
 	for line in lines:
 		parts = line.strip().split(', ')
-		if len(parts) == 3:
-			login, url, pic = parts
+		if len(parts) == 6:
+			login, url, pic, since, price_usd, is_one_time = parts
 			sponsors += f'* [{login}]({url})\n'
 
 content = content.format(contributors=contributors, wiki_contributors=wiki_contributors, sponsors=sponsors)
